@@ -13,8 +13,8 @@ export default function Login() {
 
   const handleSubmit = async () => {
     const url = isRegister
-      ? "http://localhost:5000/api/auth/register"
-      : "http://localhost:5000/api/auth/login";
+      ? `${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`
+      : `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`;
 
     try {
       const res = await fetch(url, {

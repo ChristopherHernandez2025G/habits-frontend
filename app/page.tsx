@@ -19,7 +19,7 @@ export default function Home() {
       return;
     }
 
-    fetch("http://localhost:5000/api/habits", {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/habits`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -46,7 +46,7 @@ export default function Home() {
     if (!newHabit.trim()) return;
 
     try {
-      await fetch("http://localhost:5000/api/habits", {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/habits`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export default function Home() {
     const token = localStorage.getItem("token");
 
     try {
-      await fetch(`http://localhost:5000/api/habits/${id}/complete`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/habits/${id}/complete`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
