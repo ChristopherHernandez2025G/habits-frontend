@@ -68,12 +68,15 @@ export default function Home() {
     const token = localStorage.getItem("token");
 
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/habits/${id}/complete`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/habits/${id}/complete`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       fetchHabits();
     } catch (error) {
@@ -123,16 +126,16 @@ export default function Home() {
                   {habit.name}
                 </h2>
 
-                {/* Barra de progreso */}
+                {/* Barra de progreso con color dinámico */}
                 <div className="w-full bg-gray-300 rounded-full h-4 mb-4">
                   <div
                     className={`h-4 rounded-full ${
-                     progress < 33
-                    ? "bg-red-500"
-                    : progress < 66
-                    ? "bg-yellow-500"
-                    : "bg-green-500"
-                     }`}
+                      progress < 33
+                        ? "bg-red-500"
+                        : progress < 66
+                        ? "bg-yellow-500"
+                        : "bg-green-500"
+                    }`}
                     style={{ width: `${progress}%` }}
                   ></div>
                 </div>
