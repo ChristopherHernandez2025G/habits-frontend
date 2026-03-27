@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 import type { RootState } from "../store";
 import { setHabits } from "../store/habitsSlice";
 
 export default function Home() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const habits = useSelector((state: RootState) => state.habits.habits);
 
   const [newHabit, setNewHabit] = useState("");
@@ -37,7 +39,14 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetchHabits();
+    const token = localStorage.getItem("token");
+
+    // REDIRECT SI NO HAY TOKEN
+    if (!token) {
+      router.push("/login");
+    } else {
+      fetchHabits();
+    }
   }, []);
 
   const createHabit = async () => {
@@ -126,7 +135,7 @@ export default function Home() {
                   {habit.name}
                 </h2>
 
-                {/* Barra de progreso con color dinámico */}
+                {/* Barra de progreso */}
                 <div className="w-full bg-gray-300 rounded-full h-4 mb-4">
                   <div
                     className={`h-4 rounded-full ${
